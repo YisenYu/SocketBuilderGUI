@@ -1,0 +1,46 @@
+1,2,3there could be up to three different types of pins in a single design
+
+<PCB>
+[orientation] edge;
+# either "edge" or "node" of string type (case-insensitive);
+
+<Package>
+[type] BGA;
+# {"LGA" , "BGA" , "PGA"} 
+
+
+<Package>
+[ball_type] 0;
+# this is an integer of following values:
+# (in the mean time, we only need to display as perfect sphere with the top part cut off)
+# 0: sphere; the BGA ball is drawn as a partial sphere with top part cut off
+# 1: cylinder; the BGA ball is drawn as a cylinder
+# 2: not allowed
+# 3~8: the BGA ball is drawn as a poly-sphere; this is the number of edges in the vertical cross-section 
+#  (the horizontal sections are regulated by [ball_poly])
+
+[bga_ori] edge;
+# the two allowable values are {"edge", "node"};
+
+<Analysis>
+[sweep_type] interpolating;
+#  allowable values are {"interpolate", "discrete"}; case-insensitive
+[boundary] radiation;
+#  allowable values are {"radiation", "abc", "pec", "pmc"}; case-insensitive
+[accuracy] normal;
+#  allowable values are {"fast", "normal", "high"}; case-insensitive
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

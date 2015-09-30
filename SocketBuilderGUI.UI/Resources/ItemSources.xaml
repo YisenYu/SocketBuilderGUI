@@ -1,0 +1,82 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    
+    <x:Array x:Key="comb_material_type" Type="sys:String">
+        <sys:String>Dielectric</sys:String>
+        <sys:String>Metal</sys:String>
+        <sys:String>Conductor</sys:String>
+    </x:Array>
+    <x:Array x:Key="comb_partnum_pcb" Type="sys:String">
+        <sys:String>Siggnd_rect_port</sys:String>
+    </x:Array>
+    <x:Array x:Key="comb_partnum_pkg" Type="sys:String">
+        <sys:String>BGA_siggnd_rect_port</sys:String>
+        <sys:String>LGA_siggnd_rect_port</sys:String>
+    </x:Array>
+
+    <x:Array x:Key="comb_material_category" Type="sys:String">
+        <sys:String>System</sys:String>
+        <sys:String>User</sys:String>
+    </x:Array>
+
+    <x:Array x:Key="comb_geometry_type" Type="sys:String">
+        <sys:String>Rotatsym</sys:String>
+        <sys:String>Rotatspiral</sys:String>
+        <sys:String>STL</sys:String>
+        <sys:String>Stlassy</sys:String>
+        <sys:String>Primassy</sys:String>
+    </x:Array>
+
+    <x:Array x:Key="comb_pincav_typenum" Type="sys:String">
+        <sys:String>1</sys:String>
+        <sys:String>2</sys:String>
+        <sys:String>3</sys:String>
+    </x:Array>
+
+    <x:Array x:Key="comb_pincav_shape" Type="sys:String">
+        <sys:String>Stack</sys:String>
+    </x:Array>
+    
+    <x:Array x:Key="comb_orientation" Type="sys:String">
+        <sys:String>Edge</sys:String>
+        <sys:String>Node</sys:String>
+    </x:Array>
+
+    <x:Array x:Key="comb_pkg_type" Type="sys:String">
+        <sys:String>LGA</sys:String>
+        <sys:String>BGA</sys:String>
+        <sys:String>PGA</sys:String>
+    </x:Array>
+
+    <x:Array x:Key="comb_ball_type" Type="sys:String">
+        <sys:String>0</sys:String>
+        <sys:String>1</sys:String>
+        <sys:String>3</sys:String>
+        <sys:String>4</sys:String>
+        <sys:String>5</sys:String>
+        <sys:String>6</sys:String>
+        <sys:String>7</sys:String>
+        <sys:String>8</sys:String>
+    </x:Array>
+
+    <x:Array x:Key="comb_sweep_type" Type="sys:String">
+        <sys:String>Interpolate</sys:String>
+        <sys:String>Discrete</sys:String>
+    </x:Array>
+
+    <x:Array x:Key="comb_boundary" Type="sys:String">
+        <sys:String>Radiation</sys:String>
+        <sys:String>ABC</sys:String>
+        <sys:String>PEC</sys:String>
+        <sys:String>PMC</sys:String>
+    </x:Array>
+
+    <x:Array x:Key="comb_accuracy" Type="sys:String">
+        <sys:String>Fast</sys:String>
+        <sys:String>Normal</sys:String>
+        <sys:String>High</sys:String>
+    </x:Array>
+
+
+</ResourceDictionary>
