@@ -1,5 +1,5 @@
 # SocketBuilderGUI
-GUI for SocketBuilder v1.0
+The GUI part of SocketBuilder v1.0
 
 ## Description
 This project is the GUI part of SocketBuilder v1.0
