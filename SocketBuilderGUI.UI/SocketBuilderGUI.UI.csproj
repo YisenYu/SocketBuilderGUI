@@ -67,6 +67,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IWinOpenClose.cs" />
+    <Compile Include="StatusController\StatCtrl_global.cs" />
+    <Compile Include="StatusController\StatCtrl_win_material_db.cs" />
+    <Compile Include="StatusController\StatCtrl_win_material_edit.cs" />
+    <Compile Include="StatusController\StatCtrl_win_main.cs" />
+    <Compile Include="Win_Calculator.xaml.cs">
+      <DependentUpon>Win_Calculator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Win_Main.xaml.cs">
       <DependentUpon>Win_Main.xaml</DependentUpon>
     </Compile>
@@ -87,6 +94,10 @@
     <Page Include="Resources\ItemSources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Win_Calculator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Win_Main.xaml">
       <SubType>Designer</SubType>
@@ -119,6 +130,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -127,10 +139,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\SocketBuilderGUI.BLL\SocketBuilderGUI.BLL.csproj">
-      <Project>{AFBD319F-EC36-48D0-93B2-D00DC511D203}</Project>
-      <Name>SocketBuilderGUI.BLL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SocketBuilderGUI.DAL\SocketBuilderGUI.DAL.csproj">
       <Project>{6762A795-D242-492D-8A4E-1E7003B3D097}</Project>
       <Name>SocketBuilderGUI.DAL</Name>

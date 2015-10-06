@@ -3,9 +3,15 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     
     <x:Array x:Key="comb_material_type" Type="sys:String">
-        <sys:String>Dielectric</sys:String>
-        <sys:String>Metal</sys:String>
-        <sys:String>Conductor</sys:String>
+        <sys:String>dielectric</sys:String>
+        <sys:String>metal</sys:String>
+        <sys:String>conductor</sys:String>
+    </x:Array>
+    <x:Array x:Key="comb_material_type_with_all" Type="sys:String">
+        <sys:String>all</sys:String>
+        <sys:String>dielectric</sys:String>
+        <sys:String>metal</sys:String>
+        <sys:String>conductor</sys:String>
     </x:Array>
     <x:Array x:Key="comb_partnum_pcb" Type="sys:String">
         <sys:String>Siggnd_rect_port</sys:String>

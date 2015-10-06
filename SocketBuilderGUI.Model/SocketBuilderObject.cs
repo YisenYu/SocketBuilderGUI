@@ -26,13 +26,6 @@ namespace Model
 
 
 
-        Guid id;
-        public Guid Id
-        {
-            get { return id; }
-            set { id = value; Notify("Id"); }
-        }
-
 
         #region 1.PROJECT
 
@@ -55,6 +48,13 @@ namespace Model
         {
             get { return prj_name; }
             set { prj_name = value; Notify("PrjName"); }
+        }
+
+        string design_name;
+        public string DesignName
+        {
+            get { return design_name; }
+            set { design_name = value; Notify("DesignName"); }
         }
 
         double nominal_pitch;
@@ -189,8 +189,7 @@ namespace Model
 
         
         // no data binding for this section: socket layers
-        Dictionary<string, string> DictOneSocketLayer = new Dictionary<string, string>();
-        List<Dictionary<string, string>> ListSocketLayers = new List<Dictionary<string, string>>();
+        public List<Dictionary<string, string>> ListSocketLayers;
 
 
         #endregion
@@ -199,12 +198,8 @@ namespace Model
 
         #region 3.PINCAV
         // no data binding for this section: pin types 1,2,3
-        Dictionary<string, string> DictOnePinType = new Dictionary<string, string>();
-        List<Dictionary<string, string>> ListPinTypes = new List<Dictionary<string, string>>(3);
+        public List<Dictionary<string, string>> ListPinCavInfo = new List<Dictionary<string, string>>(3);
 
-        // no data binding for this section: cav types 1,2,3
-        Dictionary<string, string> DictOneCavType = new Dictionary<string, string>();
-        List<Dictionary<string, string>> ListCavTypes = new List<Dictionary<string, string>>(3);
 
         #endregion
 
@@ -282,7 +277,7 @@ namespace Model
         public double Td1PCB
         {
             get { return td1_pcb; }
-            set { td1_pcb = value; Notify("NvoffyPCB"); }
+            set { td1_pcb = value; Notify("Td1PCB"); }
         }
         string diel_mat_name_pcb;
         public string DielMatNamePCB
@@ -294,7 +289,7 @@ namespace Model
         public double Tcu2PCB
         {
             get { return tcu2_pcb; }
-            set { tcu2_pcb = value; Notify("NvoffyPCB"); }
+            set { tcu2_pcb = value; Notify("Tcu2PCB"); }
         }
 
         #endregion
@@ -380,7 +375,7 @@ namespace Model
         public double Td1PKG
         {
             get { return td1_pkg; }
-            set { td1_pkg = value; Notify("NvoffyPKG"); }
+            set { td1_pkg = value; Notify("Td1PKG"); }
         }
         string diel_mat_name_pkg;
         public string DielMatNamePKG
@@ -392,7 +387,7 @@ namespace Model
         public double Tcu2PKG
         {
             get { return tcu2_pkg; }
-            set { tcu2_pkg = value; Notify("NvoffyPKG"); }
+            set { tcu2_pkg = value; Notify("Tcu2PKG"); }
         }
 
 
@@ -482,6 +477,13 @@ namespace Model
             set { PCB_terminals = value; Notify("PCBTerminals"); }
         }
 
+        int diffports_num;
+        public int DiffportsNum
+        {
+            get { return diffports_num; }
+            set { diffports_num = value; Notify("DiffportsNum"); }
+        }
+
         string diffports;
         public string Diffports
         {
@@ -539,8 +541,8 @@ namespace Model
 
 
         #region 8.MATERIAL
-        List<Material> PrjMaterials;
-        List<Material> SysMaterials;
+        List<Material> Materials_Sys;
+        List<Material> Materials_User;
         #endregion
 
 
@@ -548,15 +550,18 @@ namespace Model
         #region 9.PINCAVLIB
         // no data binding in this section
 
-        // no data binding for this section: socket layers
-        List<Dictionary<string, string>> ListSocketLayers = new List<Dictionary<string, string>>();
+        public List<Dictionary<string, string>> ListPinCavLibInfo;
         #endregion
 
 
         // constructor
         public SocketBuilderObject()
         {
-            Id = new Guid();
+            ListSocketLayers = new List<Dictionary<string, string>>();
+            ListPinCavInfo = new List<Dictionary<string, string>>();
+            Materials_Sys = new List<Material>();
+            Materials_User = new List<Material>();
+            ListPinCavLibInfo = new List<Dictionary<string, string>>();
         }
 
     }

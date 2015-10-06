@@ -19,8 +19,22 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
-
-
+    <Style x:Key="style_dtxtbox" TargetType="{x:Type xctk:DoubleUpDown}">
+        <Setter Property="Margin" Value="5,5,5,5"/>
+        <Setter Property="Increment" Value=".01"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="ButtonSpinnerLocation" Value="Left"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    <Style x:Key="style_itxtbox" TargetType="{x:Type xctk:IntegerUpDown}">
+        <Setter Property="Minimum" Value="0"/>
+        <Setter Property="Margin" Value="5,5,5,5"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="ButtonSpinnerLocation" Value="Left"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
     <Style x:Key="style_txtbox" TargetType="{x:Type TextBox}">
         <Setter Property="Margin" Value="5,5,5,5"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -58,6 +72,7 @@
         <Setter Property="Margin" Value="5,5,5,5"/>
         <Setter Property="CanUserAddRows" Value="False"/>
         <Setter Property="AutoGenerateColumns" Value="False"/>
+        <!--<Setter Property="RowHeight" Value="20"/>-->
         <Setter Property="HorizontalGridLinesBrush">
             <Setter.Value>
                 <SolidColorBrush Color="#FFE6E9F2"/>

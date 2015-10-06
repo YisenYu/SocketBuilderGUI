@@ -70,8 +70,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Material.cs" />
+    <Compile Include="PinCavInfo.cs" />
+    <Compile Include="PinCavLibInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SocketBuilderObject.cs" />
+    <Compile Include="SocketLayers.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SocketBuilderGUI.Util\SocketBuilderGUI.Util.csproj">
+      <Project>{32D1D7E5-541B-40F7-87A8-9E2122C59773}</Project>
+      <Name>SocketBuilderGUI.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

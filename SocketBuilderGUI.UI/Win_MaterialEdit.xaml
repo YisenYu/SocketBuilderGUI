@@ -5,8 +5,9 @@
         Icon="Resources/Imgs/app.ico"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Title="Material" Height="290" Width="400" >
-    <Grid Background="{StaticResource style_color_lblue}">
+        Loaded="Window_Loaded"
+        Title="Material" Height="290" Width="300" >
+    <Grid Background="{StaticResource style_color_lblue}" Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -19,7 +20,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
 
@@ -40,26 +41,35 @@
                Content="Conductivity"/>
         <Label Grid.Row="5" Grid.Column="0"  
                Style ="{StaticResource style_label}"
-               Content="Dielectric loss tangent"/>
+               Content="Loss tangent"/>
 
 
         <ComboBox Grid.Row="0" Grid.Column="1" 
+                  Name="comb_type"
+                  Text="{Binding Type}"
                   ItemsSource="{StaticResource comb_material_type}"
                   HorizontalAlignment="Center"
                   Width="100"
                   Style="{StaticResource style_comb}"/>
         <xctk:WatermarkTextBox Grid.Row="1" Grid.Column="1"  
+                           Name="txt_name"
+                           Text="{Binding Name}"
                  Style ="{StaticResource style_txtbox}"/>
-        <xctk:WatermarkTextBox Grid.Row="2" Grid.Column="1"  
-                 Style ="{StaticResource style_txtbox}"/>
-        <xctk:WatermarkTextBox Grid.Row="3" Grid.Column="1"  
-                 Style ="{StaticResource style_txtbox}"/>
-        <xctk:WatermarkTextBox Grid.Row="4" Grid.Column="1"  
-                 Style ="{StaticResource style_txtbox}"/>
-        <xctk:WatermarkTextBox Grid.Row="5" Grid.Column="1"  
-                 Style ="{StaticResource style_txtbox}"/>
+        <xctk:DoubleUpDown Grid.Row="2" Grid.Column="1"  
+                           Text="{Binding Permittivity}"
+                 Style ="{StaticResource style_dtxtbox}"/>
+        <xctk:DoubleUpDown Grid.Row="3" Grid.Column="1"  
+                           Text="{Binding Permeability}"
+                 Style ="{StaticResource style_dtxtbox}"/>
+        <xctk:DoubleUpDown Grid.Row="4" Grid.Column="1" 
+                           Text="{Binding Conductivity}"
+                 Style ="{StaticResource style_dtxtbox}"/>
+        <xctk:DoubleUpDown Grid.Row="5" Grid.Column="1" 
+                           Text="{Binding LossTangent}"
+                 Style ="{StaticResource style_dtxtbox}"/>
 
         <Button Grid.Row="6" Grid.Column="1"  
+                Name="Btn_Done" Click="Btn_Done_Click"
                 Style ="{StaticResource style_btn}"
                 Content="Done"/>
 

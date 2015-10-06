@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketBuilderGUI.Model", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketBuilderGUI.DAL", "SocketBuilderGUI.DAL\SocketBuilderGUI.DAL.csproj", "{6762A795-D242-492D-8A4E-1E7003B3D097}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketBuilderGUI.BLL", "SocketBuilderGUI.BLL\SocketBuilderGUI.BLL.csproj", "{AFBD319F-EC36-48D0-93B2-D00DC511D203}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,16 +71,6 @@ Global
 		{6762A795-D242-492D-8A4E-1E7003B3D097}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6762A795-D242-492D-8A4E-1E7003B3D097}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6762A795-D242-492D-8A4E-1E7003B3D097}.Release|x86.ActiveCfg = Release|x86
-		{AFBD319F-EC36-48D0-93B2-D00DC511D203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AFBD319F-EC36-48D0-93B2-D00DC511D203}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AFBD319F-EC36-48D0-93B2-D00DC511D203}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{AFBD319F-EC36-48D0-93B2-D00DC511D203}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{AFBD319F-EC36-48D0-93B2-D00DC511D203}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{AFBD319F-EC36-48D0-93B2-D00DC511D203}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AFBD319F-EC36-48D0-93B2-D00DC511D203}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AFBD319F-EC36-48D0-93B2-D00DC511D203}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{AFBD319F-EC36-48D0-93B2-D00DC511D203}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{AFBD319F-EC36-48D0-93B2-D00DC511D203}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

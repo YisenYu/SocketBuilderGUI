@@ -12,13 +12,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 
-using EthanYuWPFKit.BLL;
+
 using EthanYuWPFKit.UI;
+using SocketBuilderGUI.UI.StatusController;
 namespace SocketBuilderGUI.UI
 {
-    /// <summary>
-    /// Win_MaterialEdit.xaml 的交互逻辑
-    /// </summary>
+
     public partial class Win_MaterialEdit : Window, IWinOpenClose
     {
 
@@ -26,17 +25,7 @@ namespace SocketBuilderGUI.UI
         public bool win_opened { get; set; }
         public void WinInit()
         {
-            #region basic init
             win_opened = true;
-            #endregion
-
-            #region model preparations and datacontext setting
-            #endregion
-
-
-            #region local model & controller preparations and datacontext setting
-            #endregion
-
         }
 
         public void WinClose()
@@ -46,23 +35,95 @@ namespace SocketBuilderGUI.UI
         #endregion implement interface
 
 
-        #region menber
-        #endregion
-
+        // open and close ************************************************
         public Win_MaterialEdit()
         {
             InitializeComponent();
             WinInit();
         }
-
-        /// closing
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             base.OnClosing(e);
             WinClose();
         }
+        // loaded
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateTitle();
+            StatCtrl_win_material_edit.Instance.InitWinDatasrc();
+        }
 
 
-        /// button logic
+
+
+        // inner function ************************************************
+        void UpdateTitle()
+        {
+            Title = StatCtrl_win_material_edit.Instance.Title;
+        }
+        void UpdateInput()
+        {
+            StatCtrl_win_material_edit.Instance.UpdateMaterialInput();
+            Close();
+        }
+        bool ValidateUnique_Sys(string name)
+        {
+            return StatCtrl_win_material_db.Instance.ValidateUnique_Sys(name);
+        }
+        bool ValidateUnique_User(string name)
+        {
+            return StatCtrl_win_main.Instance.ValidateUnique_User(name);
+        }
+
+        
+
+
+
+        /// button logic ************************************************
+        private void Btn_Done_Click(object sender, RoutedEventArgs e)
+        {
+            // no type
+            if (comb_type.Text == null)
+            {
+                MessageBox.Show("Please select the type of the material.", "Notice", MessageBoxButton.OK);
+                return;
+            }
+
+            string input_name = txt_name.Text.ToString().Trim();
+
+            // no name
+            if (string.IsNullOrEmpty(input_name))
+            {
+                MessageBox.Show("Please Enter the name of the material.", "Notice", MessageBoxButton.OK);
+                return;
+            }
+
+            // is edit
+            if (input_name == StatCtrl_win_material_edit.Instance.OriginalName)
+            {
+                UpdateInput();
+                return;
+            }
+
+
+            // unique naming validation
+            if (ValidateUnique_Sys(input_name))// system
+            {
+                MessageBox.Show("This name is already existed in system material database.", "Notice", MessageBoxButton.OK);
+                return;
+            }
+            
+
+            if (StatCtrl_win_material_edit.Instance.Type.Contains("user"))
+            {
+                if (ValidateUnique_User(input_name))// user
+                {
+                    MessageBox.Show("This name is already existed in the current project.", "Notice", MessageBoxButton.OK);
+                    return;
+                }
+            }
+            UpdateInput();
+        }
+
     }
 }
