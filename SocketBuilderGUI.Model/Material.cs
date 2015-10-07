@@ -116,5 +116,14 @@ namespace Model
             Category = "system";
             Selected = false;
         }
+
+        public string AttributeString()
+        {
+            StringBuilder str = new StringBuilder();
+            str.Append(category).Append(", ").Append(type).Append(", ").Append(name).Append(", ");
+            str.Append(permittivity).Append(", ").Append(permeability).Append(", ");
+            str.Append(conductivity).Append(", ").Append(loss_tangent);
+            return str.ToString();
+        }
     }
 }

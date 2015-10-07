@@ -18,11 +18,11 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top" Background="{StaticResource style_color_lgray}">
                 <MenuItem Header="File">
-                    <MenuItem Header="New" Click="Btn_NewFile" InputGestureText ="Ctrl+N"/>
-                    <MenuItem Header="Open" Click="Btn_OpenFile" InputGestureText ="Ctrl+O"/>
-                    <MenuItem Header="Save" Click="Btn_SaveFile" InputGestureText ="Ctrl+S"/>
-                    <MenuItem Header="Close" Click="Btn_CloseFile" />
-                    <MenuItem Header="Clear all" Click="Btn_ClearFile" />
+                    <!--<MenuItem Header="New" Click="Btn_NewFile" InputGestureText ="Ctrl+N"/>-->
+                    <!--<MenuItem Header="Open" Click="Btn_OpenFile" InputGestureText ="Ctrl+O"/>-->
+                    <MenuItem Name="menu_save"  Header="Save" Click="Btn_SaveFile" InputGestureText ="Ctrl+S"/>
+                    <!--<MenuItem Header="Close" Click="Btn_CloseFile" />-->
+                    <!--<MenuItem Header="Clear all" Click="Btn_ClearFile" />-->
                     <MenuItem Header="Exit" Click="Btn_Exit"/>
                 </MenuItem>
 
@@ -44,7 +44,7 @@
                         Background="{StaticResource style_color_lblue}"
                         BorderBrush ="{StaticResource style_color_blue}"
                         >
-                <TabItem Header="Project" Width="auto">
+                <TabItem Header="Project" Width="auto" Name="tab_prj">
                     <ScrollViewer Style="{StaticResource style_scrollviewer}"
                                   HorizontalScrollBarVisibility="Disabled"
                                   >
@@ -642,18 +642,19 @@
                                    Style ="{StaticResource style_label}"
                                    Content="Ground Copper Thickness(mm)"/>
 
-                            <Label Grid.Row="14" Grid.Column="0"  
+
+                            <!--<Label Grid.Row="14" Grid.Column="0"  
                                    Style ="{StaticResource style_label}"
-                                   Content="Ball Diameter(mm)"/>
+                                   Content="Ball Type"/>-->
                             <Label Grid.Row="15" Grid.Column="0"  
                                    Style ="{StaticResource style_label}"
-                                   Content="BGA Height(mm)"/>
+                                   Content="Ball Diameter(mm)"/>
                             <Label Grid.Row="16" Grid.Column="0"  
                                    Style ="{StaticResource style_label}"
-                                   Content="Ball Type"/>
+                                   Content="BGA Height(mm)"/>
                             <Label Grid.Row="17" Grid.Column="0"  
                                    Style ="{StaticResource style_label}"
-                                   Content="Ball_Poly"/>
+                                   Content="BGA Shape"/>
                             <Label Grid.Row="18" Grid.Column="0"  
                                    Style ="{StaticResource style_label}"
                                    Content="BGA Orientation"/>
@@ -714,15 +715,16 @@
                             <xctk:DoubleUpDown Grid.Row="13" Grid.Column="1"  Text="{Binding Tcu2PKG}"
                                      Style ="{StaticResource style_dtxtbox}"/>
 
-                            <xctk:DoubleUpDown Grid.Row="14" Grid.Column="1"  Text="{Binding BGADiameter}"
-                                     Style ="{StaticResource style_dtxtbox}"/>
-                            <xctk:DoubleUpDown Grid.Row="15" Grid.Column="1"  Text="{Binding BGAHeight}"
-                                     Style ="{StaticResource style_dtxtbox}"/>
-                            <ComboBox Grid.Row="16" Grid.Column="1" 
+
+                            <!--<ComboBox Grid.Row="14" Grid.Column="1" 
                                       HorizontalAlignment="Center"
                                       Text="{Binding BallType}"
                                       ItemsSource ="{StaticResource comb_ball_type}"
-                                      Style="{StaticResource style_comb}"/>
+                                      Style="{StaticResource style_comb}"/>-->
+                            <xctk:DoubleUpDown Grid.Row="15" Grid.Column="1"  Text="{Binding BGADiameter}"
+                                     Style ="{StaticResource style_dtxtbox}"/>
+                            <xctk:DoubleUpDown Grid.Row="16" Grid.Column="1"  Text="{Binding BGAHeight}"
+                                     Style ="{StaticResource style_dtxtbox}"/>
                             <xctk:IntegerUpDown Grid.Row="17" Grid.Column="1"  Text="{Binding BallPoly}"
                                      Style ="{StaticResource style_itxtbox}"/>
                             <ComboBox Grid.Row="18" Grid.Column="1" 
@@ -921,125 +923,7 @@
                         </Grid>
                     </ScrollViewer>
                 </TabItem>
-                <TabItem Header="Material" Width="auto">
-                    <ScrollViewer Style="{StaticResource style_scrollviewer}"
-                                  HorizontalScrollBarVisibility ="Disabled">
-                        <Grid Background="{StaticResource style_color_lblue}"
-                              Height ="auto">
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-
-
-                            <!--<Label Grid.Row="0" Grid.Column="0"  
-                                   Style ="{StaticResource style_label}"
-                                   Content="Type"/>
-                            <Label Grid.Row="1" Grid.Column="0" 
-                                   Style ="{StaticResource style_label}"
-                                   Content="Category"/>-->
-
-
-                            <!--<Label Grid.Row="0" Grid.Column="2"  
-                                   Style ="{StaticResource style_label}"
-                                   Content="Name"/>
-                            <Button Grid.Row="1" Grid.Column="3"  
-                                   Style ="{StaticResource style_btn}"
-                                   Content="Search"/>-->
-
-                            <!--<xctk:WatermarkTextBox Grid.Row="0" Grid.Column="3"  
-                                     Style ="{StaticResource style_txtbox}"/>
-                            <ComboBox Grid.Row="1" Grid.Column="1" 
-                                      HorizontalAlignment="Center"
-                                      ItemsSource="{StaticResource comb_material_category}"
-                                      Width="90"
-                                      Style="{StaticResource style_comb}"/>
-                            <ComboBox Grid.Row="0" Grid.Column="1" 
-                                      HorizontalAlignment="Center"
-                                      ItemsSource="{StaticResource comb_material_type}"
-                                      Width="90"
-                                      Style="{StaticResource style_comb}"/>-->
-
-                            <Button Grid.Row="2" Grid.Column="0"  
-                                    Click="Menu_Materials_Click"
-                                   Style ="{StaticResource style_btn}"
-                                   Content="Import"/>
-                            <Button Grid.Row="2" Grid.Column="1"  
-                                   Style ="{StaticResource style_btn}"
-                                   Name="Btn_NewMaterial_User" Click="Btn_NewMaterial_User_Click"
-                                   Content="New"/>
-                            <Button Grid.Row="2" Grid.Column="2"  
-                                   Style ="{StaticResource style_btn}"
-                                   Name="Btn_EditMaterial_User" Click="Btn_EditMaterial_User_Click"
-                                   Content="Edit"/>
-                            <Button Grid.Row="2" Grid.Column="3"  
-                                   Style ="{StaticResource style_btn}"
-                                   Name="Btn_RemoveMaterial" Click="Btn_RemoveMaterial_Click"
-                                   Content="Remove"/>
-
-
-                            <!--<ScrollViewer Grid.Row="3" Grid.ColumnSpan ="4"
-                                          Height ="245"
-                                          HorizontalScrollBarVisibility="Visible"
-                                          Style="{StaticResource style_scrollviewer}" 
-                                          Margin="5">-->
-                                <DataGrid Grid.Row="3" Grid.ColumnSpan ="4" Height ="246"
-                                          Style="{StaticResource style_datagrid}"
-                                          Name="datagrid"
-                                          CanUserAddRows="False">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Category" Width="70"
-                                                Binding="{Binding Category}"           
-                                                IsReadOnly="True">
-                                        </DataGridTextColumn>
-
-                                        <DataGridTextColumn Header="Type" Width="80"
-                                                Binding="{Binding Type}" 
-                                                IsReadOnly="True">
-                                        </DataGridTextColumn>
-
-                                        <DataGridTextColumn Header="Name" Width="90"
-                                                Binding="{Binding Name}" 
-                                                IsReadOnly="True">
-                                        </DataGridTextColumn>
-
-                                        <DataGridTextColumn Header="Permittivity" Width="85"
-                                                Binding="{Binding Permittivity}" 
-                                                IsReadOnly="True">
-                                        </DataGridTextColumn>
-                                        <DataGridTextColumn Header="Permeability" Width="85"
-                                                Binding="{Binding Permeability}"
-                                                IsReadOnly="True">
-                                        </DataGridTextColumn>
-                                        <DataGridTextColumn Header="Conductivity" Width="85"
-                                                Binding="{Binding Conductivity}" 
-                                                IsReadOnly="True">
-                                        </DataGridTextColumn>
-                                        <DataGridTextColumn Header="Loss tangent" Width="100"
-                                                Binding="{Binding LossTangent}" 
-                                                IsReadOnly="True">
-                                        </DataGridTextColumn>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            <!--</ScrollViewer>-->
-                            
-
-                        </Grid>
-                    </ScrollViewer>
-                </TabItem>
+                
                 <TabItem Header="PinCavLib" Width="auto">
                     <ScrollViewer Style="{StaticResource style_scrollviewer}"
                                   HorizontalScrollBarVisibility="Disabled"
@@ -1187,6 +1071,127 @@
                                      Text="{Binding CavNominalDiameter}"
                                      Style ="{StaticResource style_dtxtbox}"/>
                             </Grid>
+
+
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+
+                <TabItem Header="Material" Width="auto" Name="tab_material">
+                    <ScrollViewer Style="{StaticResource style_scrollviewer}"
+                                  HorizontalScrollBarVisibility ="Disabled">
+                        <Grid Background="{StaticResource style_color_lblue}"
+                              
+                              Height ="auto">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+
+                            <!--<Label Grid.Row="0" Grid.Column="0"  
+                                   Style ="{StaticResource style_label}"
+                                   Content="Type"/>
+                            <Label Grid.Row="1" Grid.Column="0" 
+                                   Style ="{StaticResource style_label}"
+                                   Content="Category"/>-->
+
+
+                            <!--<Label Grid.Row="0" Grid.Column="2"  
+                                   Style ="{StaticResource style_label}"
+                                   Content="Name"/>
+                            <Button Grid.Row="1" Grid.Column="3"  
+                                   Style ="{StaticResource style_btn}"
+                                   Content="Search"/>-->
+
+                            <!--<xctk:WatermarkTextBox Grid.Row="0" Grid.Column="3"  
+                                     Style ="{StaticResource style_txtbox}"/>
+                            <ComboBox Grid.Row="1" Grid.Column="1" 
+                                      HorizontalAlignment="Center"
+                                      ItemsSource="{StaticResource comb_material_category}"
+                                      Width="90"
+                                      Style="{StaticResource style_comb}"/>
+                            <ComboBox Grid.Row="0" Grid.Column="1" 
+                                      HorizontalAlignment="Center"
+                                      ItemsSource="{StaticResource comb_material_type}"
+                                      Width="90"
+                                      Style="{StaticResource style_comb}"/>-->
+
+                            <Button Grid.Row="2" Grid.Column="0"  
+                                    Click="Menu_Materials_Click"
+                                   Style ="{StaticResource style_btn}"
+                                   Content="Import"/>
+                            <Button Grid.Row="2" Grid.Column="1"  
+                                   Style ="{StaticResource style_btn}"
+                                   Name="Btn_NewMaterial_User" Click="Btn_NewMaterial_User_Click"
+                                   Content="New"/>
+                            <Button Grid.Row="2" Grid.Column="2"  
+                                   Style ="{StaticResource style_btn}"
+                                   Name="Btn_EditMaterial_User" Click="Btn_EditMaterial_User_Click"
+                                   Content="Edit"/>
+                            <Button Grid.Row="2" Grid.Column="3"  
+                                   Style ="{StaticResource style_btn}"
+                                   Name="Btn_RemoveMaterial" Click="Btn_RemoveMaterial_Click"
+                                   Content="Remove"/>
+
+
+                            <!--<ScrollViewer Grid.Row="3" Grid.ColumnSpan ="4"
+                                          Height ="245"
+                                          HorizontalScrollBarVisibility="Visible"
+                                          Style="{StaticResource style_scrollviewer}" 
+                                          Margin="5">-->
+                            <DataGrid Grid.Row="3" Grid.ColumnSpan ="4" Height ="246"
+                                          Style="{StaticResource style_datagrid}"
+                                          Name="datagrid"
+                                          CanUserAddRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Category" Width="70"
+                                                Binding="{Binding Category}"           
+                                                IsReadOnly="True">
+                                    </DataGridTextColumn>
+
+                                    <DataGridTextColumn Header="Type" Width="80"
+                                                Binding="{Binding Type}" 
+                                                IsReadOnly="True">
+                                    </DataGridTextColumn>
+
+                                    <DataGridTextColumn Header="Name" Width="90"
+                                                Binding="{Binding Name}" 
+                                                IsReadOnly="True">
+                                    </DataGridTextColumn>
+
+                                    <DataGridTextColumn Header="Permittivity" Width="85"
+                                                Binding="{Binding Permittivity}" 
+                                                IsReadOnly="True">
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Permeability" Width="85"
+                                                Binding="{Binding Permeability}"
+                                                IsReadOnly="True">
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Conductivity" Width="85"
+                                                Binding="{Binding Conductivity}" 
+                                                IsReadOnly="True">
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Loss tangent" Width="100"
+                                                Binding="{Binding LossTangent}" 
+                                                IsReadOnly="True">
+                                    </DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <!--</ScrollViewer>-->
 
 
                         </Grid>

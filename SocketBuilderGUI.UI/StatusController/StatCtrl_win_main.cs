@@ -14,6 +14,7 @@ using SocketBuilderGUI.UI;
 using EthanYuWPFKit.UI;
 using System.Windows.Data;
 using Xceed.Wpf.Toolkit;
+using System.Windows.Input;
 namespace SocketBuilderGUI.UI.StatusController
 {
     public class StatCtrl_win_main : SingletonProvider<StatCtrl_win_main>, INotifyPropertyChanged
@@ -414,23 +415,14 @@ namespace SocketBuilderGUI.UI.StatusController
 
         public void SaveLastLayerData()
         {
-            string layer_no_str = CommonHelper.ObjectToString(StatCtrl_global.Instance.win_main.comb_socket_layer_no.SelectedItem);
-            if (string.IsNullOrEmpty(layer_no_str)) return;
-
-            int current_no = int.Parse(layer_no_str);
-            int current_len = dataobject.ListSocketLayers.Count;
-
-            if (current_no > current_len)
+            string num_current_str = CommonHelper.ObjectToString(StatCtrl_global.Instance.win_main.comb_socket_layer_no.SelectedItem);
+            if (!string.IsNullOrEmpty(num_current_str))
             {
-                for (int i = 1; i <= current_no - current_len; i++ )
-                {
-                    //dataobject.ListSocketLayers.Add(new Dictionary<string, string>());
-                    SocketLayers data = new SocketLayers();
-                    dataobject.ListSocketLayers.Add(data.ToDictionary());
-                }
+                // step1: save data at the old index
+                int num_current = CommonHelper.StringToInt(num_current_str);
+                dataobject.ListSocketLayers[num_current - 1] = comb_socket_layer_data.ToDictionary();
+                GetCurrentThicknessFromSocketLayerList();
             }
-            dataobject.ListSocketLayers[current_no - 1] = comb_socket_layer_data.ToDictionary();
-            GetCurrentThicknessFromSocketLayerList();
         }
 
         // layer No. changed
@@ -515,6 +507,18 @@ namespace SocketBuilderGUI.UI.StatusController
             StatCtrl_global.Instance.win_main.grid_pincav.DataContext = one_type_pincav_data;
         }
 
+
+        public void SaveLastPinCavData()
+        {
+            string num_current_str = CommonHelper.ObjectToString(StatCtrl_global.Instance.win_main.comb_pincav_type.SelectedItem);
+            if (!string.IsNullOrEmpty(num_current_str))
+            {
+                // save data at the old index
+                int num_current = CommonHelper.StringToInt(num_current_str);
+                dataobject.ListPinCavInfo[num_current - 1] = one_type_pincav_data.ToDictionary();
+            }
+        }
+
         public void UpdatePinCavData()
         {
             // NOTICE !!!
@@ -580,6 +584,17 @@ namespace SocketBuilderGUI.UI.StatusController
 
         }
 
+        public void SaveLastPinCavLibData()
+        {
+            string num_current_str = CommonHelper.ObjectToString(StatCtrl_global.Instance.win_main.comb_pincavlib_type.SelectedItem);
+            if (!string.IsNullOrEmpty(num_current_str))
+            {
+                // save data at the old index
+                int num_current = CommonHelper.StringToInt(num_current_str);
+                dataobject.ListPinCavLibInfo[num_current - 1] = one_type_pincavlib_data.ToDictionary();
+            }
+        }
+
         public void UpdatePinCavLibData()
         {
             string num_pre_str = CommonHelper.ObjectToString(StatCtrl_global.Instance.win_main.comb_pincavlib_type.Text);
@@ -618,6 +633,20 @@ namespace SocketBuilderGUI.UI.StatusController
         #endregion
 
 
+
+
+
+
+        public void SaveFile(string file)
+        {
+
+            //StatCtrl_global.Instance.win_main.tab_material.Focus();
+            SaveLastLayerData();
+            SaveLastPinCavData();
+            SaveLastPinCavLibData();
+            dataobject.ListMaterials_Prj = list_materials;
+            dataobject.SaveToFile(file);
+        }
 
 
 

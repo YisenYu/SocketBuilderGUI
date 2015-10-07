@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using EthanYuWPFKit.UI;
 using SocketBuilderGUI.UI.StatusController;
 using Model;
+using Microsoft.Win32;
 namespace SocketBuilderGUI.UI
 {
     public partial class Win_Main : Window, IWinOpenClose
@@ -46,8 +47,10 @@ namespace SocketBuilderGUI.UI
         }
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
+            StatCtrl_global.Instance.CloseAllSubWin();
             base.OnClosing(e);
             WinClose();
+            
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -105,7 +108,7 @@ namespace SocketBuilderGUI.UI
         }
         private void Btn_Exit(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
         private void Btn_OpenFile(object sender, RoutedEventArgs e)
         {
@@ -113,7 +116,18 @@ namespace SocketBuilderGUI.UI
         }
         private void Btn_SaveFile(object sender, RoutedEventArgs e)
         {
+            tab_prj.Focus();
 
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.FileName = "Untitled";
+            dlg.Filter = "*socketbuilder file(*.sbf)|*.sbf";
+            dlg.RestoreDirectory = true;
+
+
+            if (dlg.ShowDialog() == true)
+            {
+                StatCtrl_win_main.Instance.SaveFile(dlg.FileName);
+            }
         }
         private void Btn_ClearFile(object sender, RoutedEventArgs e)
         {

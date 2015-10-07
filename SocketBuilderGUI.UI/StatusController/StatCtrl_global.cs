@@ -76,6 +76,20 @@ namespace SocketBuilderGUI.UI.StatusController
                 win.ShowDialog();
             }
         }
+
+        public void CloseWin<T>(T win) where T:Window, IWinOpenClose
+        {
+            if (win == null) return;
+            if (win.win_opened == false) return;
+            win.Close();
+        }
+
+        public void CloseAllSubWin()
+        {
+            CloseWin<Win_Calculator>(win_calculator);
+            CloseWin<Win_MaterialEdit>(win_material_edit);
+            CloseWin<Win_MaterialsDatabase>(win_material_db);
+        }
         #endregion
 
 

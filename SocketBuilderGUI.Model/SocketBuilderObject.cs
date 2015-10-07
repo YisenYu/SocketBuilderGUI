@@ -6,6 +6,7 @@ using System.Text;
 
 
 using System.ComponentModel;
+using System.IO;
 namespace Model
 {
     public class SocketBuilderObject : INotifyPropertyChanged
@@ -404,6 +405,7 @@ namespace Model
             get { return bga_height; }
             set { bga_height = value; Notify("BGAHeight"); }
         }
+
         string ball_type;
         public string BallType
         {
@@ -416,6 +418,7 @@ namespace Model
             get { return ball_poly; }
             set { ball_poly = value; Notify("BallPoly"); }
         }
+
         string bga_orientation;
         public string BGAOrientation
         {
@@ -541,8 +544,9 @@ namespace Model
 
 
         #region 8.MATERIAL
-        List<Material> Materials_Sys;
-        List<Material> Materials_User;
+        //List<Material> Materials_Sys;
+        //List<Material> Materials_User;
+        public List<Material> ListMaterials_Prj;
         #endregion
 
 
@@ -559,10 +563,199 @@ namespace Model
         {
             ListSocketLayers = new List<Dictionary<string, string>>();
             ListPinCavInfo = new List<Dictionary<string, string>>();
-            Materials_Sys = new List<Material>();
-            Materials_User = new List<Material>();
+            //Materials_Sys = new List<Material>();
+            //Materials_User = new List<Material>();
+            ListMaterials_Prj = new List<Material>();
             ListPinCavLibInfo = new List<Dictionary<string, string>>();
         }
 
+
+
+        public void SaveToFile(string file)
+        {
+            FileStream fs = new FileStream(file, FileMode.Create);
+            StreamWriter sw = new StreamWriter(fs);
+            StringBuilder str = new StringBuilder();
+
+
+            FileHelper.FileHeaderWriter(sw);
+            // <Project> *****************************************
+            FileHelper.WriteSection(sw, "Project", true);
+            FileHelper.WriteItem(sw, "user_id", user_id);
+            FileHelper.WriteItem(sw, "company_id", company_id);
+            FileHelper.WriteItem(sw, "project_name", prj_name);
+            FileHelper.WriteItem(sw, "design_name", design_name);
+            FileHelper.WriteItem(sw, "nominal_pitch", nominal_pitch);
+            FileHelper.WriteItem(sw, "x_pitch", x_pitch);
+            FileHelper.WriteItem(sw, "y_pitch", y_pitch);
+            FileHelper.WriteItem(sw, "x_offset", x_offset);
+            FileHelper.WriteItem(sw, "port_impedance", port_impedance);
+            FileHelper.WriteItem(sw, "term_impedance", term_impedance);
+
+            FileHelper.WriteItems(sw, "se_spec", 
+                se_spec_IL, se_spec_RL, se_spec_NEXT, se_spec_FEXT, se_spec_freq);
+            FileHelper.WriteItems(sw, "diff_spec",
+                diff_spec_IL, diff_spec_RL, diff_spec_NEXT, diff_spec_FEXT, diff_spec_freq);
+
+            FileHelper.WriteSection(sw, "Project", false);
+            sw.Flush();
+
+
+            // <Socket> *****************************************
+            FileHelper.WriteSection(sw, "Socket", true);
+            FileHelper.WriteItem(sw, "total_layers", total_layers);
+            FileHelper.WriteItem(sw, "total_height", total_height);
+
+            for (int i = 0; i < TotalLayers; i++ )
+            {
+                SocketLayers obj = SocketLayers.ToObject(ListSocketLayers[i]);
+                FileHelper.WriteItems(sw, "layer",
+                    (i+1), obj.LayerMaterialType, obj.LayerMaterialName, obj.LayerThickness);
+            }
+            FileHelper.WriteSection(sw, "Socket", false);
+            sw.Flush();
+
+
+
+            // <PinCav> *****************************************
+            FileHelper.WriteSection(sw, "PinCav", true);
+            for (int i = 0; i < ListPinCavInfo.Count; i++)
+            {
+                PinCavInfo obj = PinCavInfo.ToObject(ListPinCavInfo[i]);
+                FileHelper.WriteItems(sw, "pin" + (i + 1).ToString(),
+                    obj.PinName, obj.PinType, obj.PinShape, obj.PinPartNumber, obj.PinCrossSection);
+                FileHelper.WriteItems(sw, "cav" + (i + 1).ToString(),
+                    obj.CavName, obj.CavType, obj.CavShape, obj.CavPartNumber);
+            }
+            FileHelper.WriteSection(sw, "PinCav", false);
+            sw.Flush();
+
+
+
+            // <PCB> *****************************************
+            FileHelper.WriteSection(sw, "PCB", true);
+            FileHelper.WriteItem(sw, "part_number", part_number_pcb);
+            FileHelper.WriteItem(sw, "description", description_pcb);
+            FileHelper.WriteItem(sw, "npoly", npoly_pcb);
+            FileHelper.WriteItem(sw, "orientation", orientation_pcb);
+            FileHelper.WriteItem(sw, "dpad", dpad_pcb);
+            FileHelper.WriteItem(sw, "tpad", tpad_pcb);
+            FileHelper.WriteItem(sw, "twidth", twidth_pcb);
+            FileHelper.WriteItem(sw, "nvoffx", nvoffx_pcb);
+            FileHelper.WriteItem(sw, "nvoffy", nvoffy_pcb);
+            FileHelper.WriteItem(sw, "td1", td1_pcb);
+            FileHelper.WriteItem(sw, "diel_mat_name", diel_mat_name_pcb);
+            FileHelper.WriteItem(sw, "tcu2", tcu2_pcb);
+
+
+            FileHelper.WriteSection(sw, "PCB", false);
+            sw.Flush();
+
+
+
+            // <Package> *****************************************
+            FileHelper.WriteSection(sw, "Package", true);
+            FileHelper.WriteItem(sw, "type", type_pkg);
+            FileHelper.WriteItem(sw, "part_number", part_number_pkg);
+            FileHelper.WriteItem(sw, "description", description_pkg);
+            FileHelper.WriteItem(sw, "npoly", npoly_pkg);
+            FileHelper.WriteItem(sw, "orientation", orientation_pkg);
+            FileHelper.WriteItem(sw, "dpad", dpad_pkg);
+            FileHelper.WriteItem(sw, "tpad", tpad_pkg);
+            FileHelper.WriteItem(sw, "twidth", twidth_pkg);
+            FileHelper.WriteItem(sw, "nvoffx", nvoffx_pkg);
+            FileHelper.WriteItem(sw, "nvoffy", nvoffy_pkg);
+            FileHelper.WriteItem(sw, "td1", td1_pkg);
+            FileHelper.WriteItem(sw, "diel_mat_name", diel_mat_name_pkg);
+            FileHelper.WriteItem(sw, "tcu2", tcu2_pkg);
+
+            if (type_pkg == "BGA")
+            {
+                FileHelper.WriteItem(sw, "bga_diameter", bga_diameter);
+                FileHelper.WriteItem(sw, "bga_height", bga_height);
+                FileHelper.WriteItem(sw, "bga_shape", ball_poly);
+                FileHelper.WriteItem(sw, "bga_orientation", bga_orientation);
+            }
+            FileHelper.WriteSection(sw, "Package", false);
+            sw.Flush();
+
+
+            // <Array> *****************************************
+            FileHelper.WriteSection(sw, "Array", true);
+            FileHelper.WriteItem(sw, "nx", nx_array);
+            FileHelper.WriteItem(sw, "ny", ny_array);
+            FileHelper.WriteItems(sw, "xedge", xedge_min, xedge_max);
+            FileHelper.WriteItems(sw, "yedge", yedge_min, yedge_max);
+            FileHelper.WriteItemMultiLine(sw, "pin_array", pin_array);
+            FileHelper.WriteItemMultiLine(sw, "PCB_terminals", PCB_terminals);
+            FileHelper.WriteItem(sw, "diffports", diffports_num);
+            sw.WriteLine(diffports);
+
+            FileHelper.WriteSection(sw, "Array", false);
+            sw.Flush();
+
+
+
+            // <Analysis> *****************************************
+            FileHelper.WriteSection(sw, "Analysis", true);
+            FileHelper.WriteItem(sw, "start_freq", start_freq);
+            FileHelper.WriteItem(sw, "stop_freq", stop_freq);
+            FileHelper.WriteItem(sw, "step_freq", step_freq);
+            FileHelper.WriteItem(sw, "mesh_freq", mesh_freq);
+            FileHelper.WriteItem(sw, "sweep_type", sweep_type);
+            FileHelper.WriteItem(sw, "boundary", boundary);
+            FileHelper.WriteItem(sw, "accuracy", accuracy);
+
+
+
+            FileHelper.WriteSection(sw, "Analysis", false);
+            sw.Flush();
+
+            // <Material> *****************************************
+            FileHelper.WriteSection(sw, "Material", true);
+            foreach (Material obj in ListMaterials_Prj)
+            {
+                sw.WriteLine(obj.AttributeString() + ";");
+            }
+            FileHelper.WriteSection(sw, "Material", false);
+            sw.Flush();
+
+
+            // <PinCavLib> *****************************************
+            FileHelper.WriteSection(sw, "PinCavLib", true);
+            for (int i = 0; i < 3; i++ )
+            {
+                PinCavInfo pincav = PinCavInfo.ToObject(ListPinCavInfo[i]);
+                PinCavLibInfo pincavlib = PinCavLibInfo.ToObject(ListPinCavLibInfo[i]);
+                FileHelper.WriteItems(sw, "Pin"+(i+1).ToString(),
+                    pincav.PinName + "/" + pincav.CavName,
+                    pincavlib.GeometryType);
+
+                sw.WriteLine(FileHelper.Strings2OneString(
+                    "{" + pincav.PinName + "}",
+                    pincavlib.PinMaterialName,
+                    pincavlib.PinSectionsNum,
+                    pincavlib.PinTotalLength,
+                    pincavlib.PinNominalDiameter,
+                    pincavlib.PinParams
+                    ));
+                sw.Flush();
+                sw.WriteLine(FileHelper.Strings2OneString(
+                    "{" + pincav.CavName + "}",
+                    pincavlib.CavSectionsNum,
+                    pincavlib.CavTotalLength,
+                    pincavlib.CavNominalDiameter,
+                    pincavlib.CavParams
+                    ));
+                sw.Flush();
+            }
+            FileHelper.WriteSection(sw, "PinCavLib", false);
+            sw.Flush();
+
+
+
+            sw.Close();
+            fs.Close();
+        }
     }
 }
