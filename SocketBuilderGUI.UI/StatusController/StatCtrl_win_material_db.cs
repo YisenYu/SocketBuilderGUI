@@ -112,12 +112,18 @@ namespace SocketBuilderGUI.UI.StatusController
                 if (list_material_names[i] == CurrentEditItem.Name)
                 {
                     list_material_names[i] = obj.Name;
-                    list_material_sys[i] = obj;
+                    //list_material_sys[i] = obj;
                     break;
                 }
             }
 
             Material_DAL.Update(obj);
+            list_material_sys = Material_DAL.Search(null, 
+                StatCtrl_global.Instance.win_material_db.comb_type.Text.Trim(),
+                StatCtrl_global.Instance.win_material_db.txt_name.Text.Trim());
+
+
+
             UpdateWinDataContext();
         }
 
